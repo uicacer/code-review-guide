@@ -1,0 +1,20 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Python (in case examples are added)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Node (in case examples are added)
+node_modules/
+
+# Local notes not meant for the repo
+scratch/
+*.local.md

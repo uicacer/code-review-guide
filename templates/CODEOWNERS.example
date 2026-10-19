@@ -1,0 +1,30 @@
+# CODEOWNERS example — for teams (not needed for solo projects).
+#
+# What it does: automatically requests a review from the right person/team when
+# a PR touches files they own, and (with branch protection) requires their
+# approval before merge. This is how larger/cross-team review scales without a
+# central bottleneck.
+#
+# To use: save as .github/CODEOWNERS (or CODEOWNERS at repo root).
+# Syntax: <path pattern>   <@user or @org/team>
+# Later matches win, so put general rules first and specific rules last.
+#
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for everything (fallback)
+*                           @uicacer/rse-team
+
+# Data pipeline / anything touching PHI — require the security champion too
+/pipelines/                 @uicacer/rse-team @the-security-champion
+/healthlake/                @uicacer/rse-team @the-security-champion
+/**/fhir_mapping/           @uicacer/rse-team @the-security-champion
+
+# ML / model code
+/models/                    @the-ml-lead
+
+# Infrastructure (AWS, CI config) — higher-stakes, require infra owner
+/infrastructure/            @the-infra-owner
+/.github/workflows/         @the-infra-owner
+
+# Docs can be owned more loosely
+/docs/                      @uicacer/rse-team
