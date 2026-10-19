@@ -119,4 +119,4 @@ Honest note: for tiny, throwaway solo scripts, full process is overkill — lean
 3. **Code touches PHI / secure compute:** turn on Layer 5 — adversarial pass + security checklist.
 4. **Larger / cross-team:** add [`CODEOWNERS`](GLOSSARY.md#review-culture--process-terms), required reviews, and dual approval across team boundaries. Avoid heavyweight central approval boards — evidence shows they make delivery slower *and* less stable.
 
-See the condensed [slide deck](slides/code-review-protocol.md) and the full [references](docs/04-references.md).
+See the full [references](docs/04-references.md).

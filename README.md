@@ -23,7 +23,7 @@ It also serves as our shareable answer when someone asks *“what is ACER's code
 | Review solo (no second person) | [docs/01-solo-vs-team.md](docs/01-solo-vs-team.md) |
 | Review security / PHI code | [docs/03-adversarial-review.md](docs/03-adversarial-review.md) + [checklist](templates/review-checklist.md) |
 | Copy our templates | [templates/](templates/) |
-| Present this to a team | [slides/code-review-protocol.md](slides/code-review-protocol.md) |
+| Present this to a team | **Slides:** _(add Google Slides link here)_ |
 | Read the sources | [docs/04-references.md](docs/04-references.md) |
 
 ---

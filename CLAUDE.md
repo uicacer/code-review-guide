@@ -10,7 +10,6 @@ A pure documentation and templates repository — no code, no build system, no t
 - **[tutorial/](tutorial/)** — 4-level hands-on tutorial (Level 0 mechanics → Level 3 expert/AI)
 - **[docs/](docs/)** — deep-dives: solo review, reviewing AI code, adversarial review, references
 - **[templates/](templates/)** — reusable artifacts: PR template, review checklist, `.pre-commit-config.yaml`, CODEOWNERS example
-- **[slides/](slides/)** — condensed slide-deck version of the protocol
 - **[GLOSSARY.md](GLOSSARY.md)** — plain-language definitions for every term used in the docs
 
 ## Conventions
