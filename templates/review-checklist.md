@@ -8,6 +8,7 @@ A printable checklist for the human layers of the [protocol](../PROTOCOL.md). Go
 
 **Correctness & design**
 - [ ] Does it actually solve the stated problem?
+- [ ] Alignment: does it do exactly what it claims, with no unrelated or tangled changes?
 - [ ] Does it fit the existing architecture (not fight it)?
 - [ ] Edge cases handled: empty input, nulls, errors, boundaries?
 - [ ] Idempotent / safe to run twice where that matters?

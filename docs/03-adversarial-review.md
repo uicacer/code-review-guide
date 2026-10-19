@@ -8,9 +8,9 @@ This is **Layer 5** of the [protocol](../PROTOCOL.md): the security pass we add 
 
 ## The short answer first
 
-**Full red/blue "teaming" is overkill for ACER.** It was built for big companies and governments with dedicated attack and defense staff and 24/7 security operations. A solo-to-small research group should not pretend to run that.
+**Full red/blue "teaming" is overkill for a small team.** It was built for big companies and governments with dedicated attack and defense staff and 24/7 security operations. A solo-to-small research group should not pretend to run that.
 
-**But the adversarial *mindset* is cheap, high-value, and we should absolutely use it**: as a rotating role plus a checklist, not an org chart. Because many ACER projects (such as AIHealth4All) handle real [PHI](../GLOSSARY.md#health-data-terms), the minimum bar is: **a security-focused pass on any change touching data access, authentication, de-identification, or ML inputs/outputs.**
+**But the adversarial *mindset* is cheap, high-value, and we should absolutely use it**: as a rotating role plus a checklist, not an org chart. Because many projects handle real [PHI](../GLOSSARY.md#health-data-terms) (for example, a clinical FHIR pipeline), the minimum bar is: **a security-focused pass on any change touching data access, authentication, de-identification, or ML inputs/outputs.**
 
 ---
 
@@ -69,13 +69,13 @@ The same change, seen two ways - each catches different, complementary bugs:
 
 ---
 
-## The AI/ML angle (relevant to ML projects like AIHealth4All)
+## The AI/ML angle (relevant to ML projects)
 
 Two distinct things, both worth a thought:
 - **Red-teaming the ML system itself**: e.g., prompt injection, sensitive-info disclosure, data/model poisoning (see the [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/)). Membership-inference on a clinical model is a real patient-privacy risk, not a hypothetical.
 - **Red-teaming AI-*generated* code**: treat assistant output adversarially: assume it may ship insecure defaults, skip validation, or invent dependencies. Give it the *same or stronger* attacker pass as human code.
 
-You do not need tooling to start - the mindset + checklist is 90% of the value. If ACER later wants to automate ML red-teaming, Microsoft's PyRIT is a free starting point.
+You do not need tooling to start - the mindset + checklist is 90% of the value. If you later want to automate ML red-teaming, Microsoft's PyRIT is a free starting point.
 
 ---
 

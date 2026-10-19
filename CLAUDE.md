@@ -9,7 +9,8 @@ A pure documentation and templates repository - no code, no build system, no tes
 - **[PROTOCOL.md](PROTOCOL.md)**: the canonical 6-layer code review workflow (the "standard")
 - **[tutorial/](tutorial/)**: 4-level hands-on tutorial (Level 0 mechanics → Level 3 expert/AI)
 - **[docs/](docs/)**: deep-dives: solo review, reviewing AI code, adversarial review, measuring review health, references
-- **[templates/](templates/)**: reusable artifacts: PR template, review checklist, `.pre-commit-config.yaml`, CODEOWNERS example
+- **[templates/](templates/)**: reusable artifacts: PR template, review checklist, `.pre-commit-config.yaml`, CODEOWNERS example, GitHub Actions CI workflow
+- **[exercises/](exercises/)**: hands-on exercises with answer keys for tutorial Levels 1 to 3 (Level 0 uses GitHub Skills)
 - **[GLOSSARY.md](GLOSSARY.md)**: plain-language definitions for every term used in the docs
 
 ## Conventions
@@ -26,7 +27,7 @@ A pure documentation and templates repository - no code, no build system, no tes
 | 2 | Author self-review | Author |
 | 3 | CI safety net | GitHub Actions |
 | 4 | Human review | Peer reviewer |
-| 5 | Adversarial & PHI pass | Rotating attacker (ACER addition) |
+| 5 | Adversarial & PHI pass | Rotating attacker (for sensitive data) |
 
 **Solo mode** is a first-class variant: any change to team-mode layers must have a corresponding solo-mode equivalent documented.
 

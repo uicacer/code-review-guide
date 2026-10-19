@@ -43,14 +43,14 @@ In the AI era the effort is lopsided. Generating a large PR is cheap, while revi
 1. **The reviewer becomes a bottleneck,** and gets little visible credit while authors claim the delivered features.
 2. **"AI PR dumping":** one person generates volume and quietly uses a reviewer as a safety net.
 
-Mitigations ACER should adopt:
+Mitigations to adopt:
 
 - **Authors owe reviewers a reviewable PR:** a small diff, proof it runs, a short AI-deviation note, and the risky parts flagged (the [AI PR contract](02-reviewing-ai-code.md)).
 - **Rotate review** so the load and the knowledge spread, with no single safety net.
 - **Count review as real work.** It is ownership and knowledge transfer, not a career dead end.
 - **Keep changes small** so no single review is overwhelming.
 
-> A note on "reviewer-less" proposals: some argue highly competent engineers should be allowed to ship without review. For throwaway work that may be fine, but for ACER production, shared, or PHI code it is not. The better lesson from that same argument is to move review earlier (review the plan) and keep it live (steer the agent as it generates), not to drop it. See [Reviewing AI code](02-reviewing-ai-code.md).
+> A note on "reviewer-less" proposals: some argue highly competent engineers should be allowed to ship without review. For throwaway work that may be fine, but for production, shared, or PHI code it is not. The better lesson from that same argument is to move review earlier (review the plan) and keep it live (steer the agent as it generates), not to drop it. See [Reviewing AI code](02-reviewing-ai-code.md).
 
 ---
 

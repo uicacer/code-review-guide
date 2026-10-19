@@ -1,14 +1,14 @@
-# ACER Code Review
+# Code Review: A Practical Guide
 
-**How we review code at ACER - and how to learn to do it well, from zero to expert.**
+**A practical standard for reviewing code well, and a hands-on guide to learning it from zero to expert.**
 
 This repository is two things:
-1. **Our standard**: the [ACER Code Review Protocol](PROTOCOL.md), a concrete layered workflow any project can adopt.
+1. **Our standard**: the [Code Review Protocol](PROTOCOL.md), a concrete layered workflow any project can adopt.
 2. **A course**: a hands-on [zero-to-expert tutorial](tutorial/) for anyone who has never reviewed code (or never used an AI coding assistant well).
 
-It applies to **any software project**: scripts, libraries, web apps, data pipelines, or AI/ML systems. It pays special attention to two situations common at ACER: working **solo** (no second reviewer), and handling **sensitive or regulated data**. Health-data projects get extra care, because a defect there can expose patient information (a HIPAA breach) - AIHealth4All (AWS HealthLake / FHIR) is one such example.
+It applies to **any software project**: scripts, libraries, web apps, data pipelines, or AI/ML systems. It pays special attention to two situations: working **solo** (no second reviewer), and handling **sensitive or regulated data**. Clinical and health-data projects get extra care, because a defect there can expose patient information (a HIPAA breach); a FHIR-based patient-data pipeline is one such example.
 
-It also serves as our shareable answer when someone asks *"what is ACER's code review process?"*
+It is written to be shared freely, as an answer to the question *"what does a good code review process look like?"*
 
 ---
 
@@ -23,6 +23,7 @@ It also serves as our shareable answer when someone asks *"what is ACER's code r
 | Review solo (no second person) | [docs/01-solo-vs-team.md](docs/01-solo-vs-team.md) |
 | Review security / PHI code | [docs/03-adversarial-review.md](docs/03-adversarial-review.md) + [checklist](templates/review-checklist.md) |
 | Copy our templates | [templates/](templates/) |
+| Practice hands-on | [exercises/](exercises/) |
 | Present this to a team | **Slides:** _(add Google Slides link here)_ |
 | Measure if review is working | [docs/05-measuring-review-health.md](docs/05-measuring-review-health.md) |
 | Read the sources | [docs/04-references.md](docs/04-references.md) |
@@ -52,7 +53,7 @@ The hard part of software has shifted from **writing** code to **verifying** it 
 ---
 
 ## Who to ask
-Maintained by the ACER Research Software Engineering team. Questions, suggestions, and PRs welcome - practice what we preach and open a pull request.
+Maintained by the Research Software Engineering team at ACER (UIC). Questions, suggestions, and PRs welcome - practice what we preach and open a pull request.
 
 ## License
 

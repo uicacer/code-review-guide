@@ -34,6 +34,7 @@ The sources behind this repo, grouped by topic. All URLs were verified to load i
 - **Nate Goethel (Mews), "Code generation is now cheap, code review still isn't"**: https://developers.mews.com/code-generation-is-cheap-review-remains-costly/ - Risk-tiered review (label blast radius; lighter review on low-risk PRs) and metrics to detect rubber-stamping.
 - **Daz - Code Review in the Age of AI-Augmented Development**: https://daz.is/blog/code-review-ai-augmented-development/ - The coherence problem, reviewing the plan before generation, context-sizing, and AI deviation reports.
 - **Alex Ashitkin - Code reviews in the AI era**: https://medium.com/@xqmbiuy/code-reviews-in-the-ai-era-12698f863924 - Review as live guidance of the agent, and the author/reviewer effort imbalance. (Paywalled.)
+- **Kamali, Tuna, Haratian & Tuzun (2026) - Rethinking Code Review in the Age of AI: A Vision for Agentic Code Review**: https://arxiv.org/abs/2605.17548 - A research vision for agentic, lifecycle-wide review; source of the "human control point", alignment/scope, and impact framing. (Vision paper, not an empirical study.)
 
 ## Security, adversarial & health data
 - ⭐ **OWASP Code Review Guide**: https://owasp.org/www-project-code-review-guide/

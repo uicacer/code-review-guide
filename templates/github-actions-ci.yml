@@ -1,8 +1,8 @@
-# ACER starter CI workflow for GitHub Actions (Python-oriented; adapt as needed).
+# Starter CI workflow for GitHub Actions (Python-oriented; adapt as needed).
 #
 # What this does: every time someone pushes or opens a pull request, GitHub runs
 # these checks on a fresh server and shows a green check or red X on the PR.
-# This is "Layer 3" of the ACER Code Review Protocol: the safety net that runs
+# This is "Layer 3" of the Code Review Protocol: the safety net that runs
 # even if someone skipped the local pre-commit hook.
 #
 # To use: copy this file into your repository at:

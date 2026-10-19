@@ -1,5 +1,5 @@
 <!--
-ACER pull request template.
+Pull request template.
 To use: save as .github/pull_request_template.md in your repo.
 GitHub will pre-fill every new PR with this. Delete the italic hints as you fill it in.
 -->

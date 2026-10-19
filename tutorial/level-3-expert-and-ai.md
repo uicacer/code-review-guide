@@ -3,12 +3,13 @@
 **Goal:** handle the two hardest, highest-stakes cases - reviewing **AI-generated code**, and doing a security/PHI **adversarial pass** (Layer 5) - and start mentoring others.
 
 > Prerequisite: [Levels 0-2](level-0-mechanics.md). All terms in the [Glossary](../GLOSSARY.md).
+> Practice it: [exercises/level-3-ai-phi](../exercises/level-3-ai-phi/).
 
 ---
 
 ## Part A - Reviewing AI-generated code
 
-Most code at ACER will soon be written with an [AI coding assistant](../GLOSSARY.md#ai-coding-terms) (Copilot, Claude, Cursor, Gemini). This does **not** lower the review bar - it raises it.
+Most code will soon be written with an [AI coding assistant](../GLOSSARY.md#ai-coding-terms) (Copilot, Claude, Cursor, Gemini). This does **not** lower the review bar - it raises it.
 
 **The one principle:** *Treat AI output like a pull request from an eager, fast, over-confident junior developer. It must be verified. You are accountable for every line - a computer cannot be held accountable.*
 
@@ -87,7 +88,7 @@ Normal review asks *"does this work?"* [**Adversarial review**](../GLOSSARY.md#t
 - [ ] Ran a STRIDE-lite adversarial pass on a data-touching PR and filed any detection gaps.
 - [ ] Pair-reviewed with another developer.
 
-🎓 **You can now carry out every layer of the [ACER Code Review Protocol](../PROTOCOL.md).**
+🎓 **You can now carry out every layer of the [Code Review Protocol](../PROTOCOL.md).**
 
 ---
 

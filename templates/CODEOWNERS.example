@@ -12,12 +12,12 @@
 # Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 # Default owner for everything (fallback)
-*                           @uicacer/rse-team
+*                           @your-org/review-team
 
 # Data pipeline / anything touching PHI - require the security champion too
-/pipelines/                 @uicacer/rse-team @the-security-champion
-/healthlake/                @uicacer/rse-team @the-security-champion
-/**/fhir_mapping/           @uicacer/rse-team @the-security-champion
+/pipelines/                 @your-org/review-team @the-security-champion
+/healthlake/                @your-org/review-team @the-security-champion
+/**/fhir_mapping/           @your-org/review-team @the-security-champion
 
 # ML / model code
 /models/                    @the-ml-lead
@@ -27,4 +27,4 @@
 /.github/workflows/         @the-infra-owner
 
 # Docs can be owned more loosely
-/docs/                      @uicacer/rse-team
+/docs/                      @your-org/review-team

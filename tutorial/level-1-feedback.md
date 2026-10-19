@@ -3,6 +3,7 @@
 **Goal:** write review comments that are clear, kind, and useful - and receive them without taking it personally. This is the hardest *soft* skill in review, and the one beginners get wrong most.
 
 > Prerequisite: [Level 0](level-0-mechanics.md). New words are in the [Glossary](../GLOSSARY.md).
+> Practice it: [exercises/level-1-feedback](../exercises/level-1-feedback/).
 
 ---
 

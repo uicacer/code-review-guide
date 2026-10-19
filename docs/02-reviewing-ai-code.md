@@ -1,6 +1,6 @@
 # Reviewing AI-Generated Code
 
-Most code at ACER will soon be AI-assisted. That does not lower the review bar - it *raises* it. This doc covers (a) how to write AI code that is reviewable, and (b) how to review it.
+Most code will soon be AI-assisted. That does not lower the review bar - it *raises* it. This doc covers (a) how to write AI code that is reviewable, and (b) how to review it.
 
 **The one principle:** *Treat AI output like a pull request from an eager, fast, over-confident junior developer. It must be verified. Accountability stays with the human - a computer can never be held accountable.*
 
@@ -62,7 +62,7 @@ These are bots that automatically read a pull request and post review comments, 
 - **Bad at:** deep domain logic, cross-system design, and *your* project's intent. They also produce **false positives / "text noise"** and can [hallucinate](../GLOSSARY.md#ai-coding-terms).
 - **The rule:** use one as a **pre-review gate** that clears noise - then a **human signs off** on logic, security, and architecture. **Augment, never replace.**
 
-**Do we (ACER) need them?** Optional, not required. They are a *nice-to-have*, especially valuable for **solo developers** who have no human reviewer - a bot is a cheap first opinion. They are **not a substitute** for Layers 1-3 (hooks + CI do the deterministic checks more reliably) or for the Layer 4/5 human judgement, and for **PHI code** check the tool's data-handling terms before pointing it at a private health-data repo. Recommendation: **start with pre-commit + CI (free, deterministic). Add GitHub Copilot review or CodeRabbit later if the team wants an extra automated opinion - treat its comments as suggestions, not gospel.**
+**Do you need them?** Optional, not required. They are a *nice-to-have*, especially valuable for **solo developers** who have no human reviewer - a bot is a cheap first opinion. They are **not a substitute** for Layers 1-3 (hooks + CI do the deterministic checks more reliably) or for the Layer 4/5 human judgement, and for **PHI code** check the tool's data-handling terms before pointing it at a private health-data repo. Recommendation: **start with pre-commit + CI (free, deterministic). Add GitHub Copilot review or CodeRabbit later if the team wants an extra automated opinion - treat its comments as suggestions, not gospel.**
 
 ### The coherence problem (the subtle one)
 AI code tends to have **local** correctness but not **global** coherence: overlapping solutions across modules, abstractions that do not compose, naming that drifts. Because each piece looks clean, nothing trips your correction reflex - so the mess accumulates *faster* than with human code. When reviewing, zoom out: does this fit the system, or does it just work in isolation?
@@ -79,7 +79,13 @@ Give these extra human attention no matter how confident the code or the bot loo
 After the AI implements something, ask it: *"Where did you deviate from the plan, and what decisions did you make?"* That surfaces the judgment calls for you to review, instead of making you hunt for surprises in the diff. A short implementation/deviation report is one of the highest-value, lowest-effort review aids - require it in the PR for non-trivial AI work.
 
 ### Review happens live, not only at the PR
-With an agent, generation already resembles pair programming: the AI is the author, you are the reviewer, in real time. Often the highest-leverage place to apply review skill is **during** generation - steering, correcting, and constraining the agent - not only in an after-the-fact PR. (ACER caveat: live steering does **not** remove the Layer 4/5 pass for anything going to shared, production, or PHI code.)
+With an agent, generation already resembles pair programming: the AI is the author, you are the reviewer, in real time. Often the highest-leverage place to apply review skill is **during** generation - steering, correcting, and constraining the agent - not only in an after-the-fact PR. (Caveat: live steering does **not** remove the Layer 4/5 pass for anything going to shared, production, or PHI code.)
+
+### Human control points
+A useful way to keep AI in its place is to make every AI output pass a **named human gate** before it has any effect. The author approves AI-written code before opening the PR. The reviewer approves before an AI-suggested fix is applied. You are not reading everything the AI does, but nothing it produces takes effect without a human sign-off at a defined point.
+
+### Review by logical unit, not line order
+When a change is large or AI-generated, do not read it top to bottom. Group the diff by logical unit (a function, a class, a feature) and review each unit as a whole against the stated intent. This semantic reading catches the coherence and design problems that a line-by-line pass slides past.
 
 ### Red flags specific to AI output
 - A dependency/import you do not recognize → verify it exists and is pinned.

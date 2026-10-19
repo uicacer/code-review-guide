@@ -1,6 +1,6 @@
 # Solo vs. Team Code Review
 
-Code review assumes a second person. Many ACER projects have exactly one developer. This doc shows how the [protocol](../PROTOCOL.md) works in both cases - and how a solo developer manufactures the "second pair of eyes."
+Code review assumes a second person. Many projects have exactly one developer. This doc shows how the [protocol](../PROTOCOL.md) works in both cases - and how a solo developer manufactures the "second pair of eyes."
 
 ---
 
@@ -41,7 +41,7 @@ You replace the missing human with four cheap, reliable signals:
 - Rubber-duck: explain the change out loud; the bugs surface when you hear yourself.
 
 ### 3. An occasional human
-- A **monthly 30-minute review** with an ACER RSE, a departmental "code clinic", or a [US-RSE](https://us-rse.org/) peer.
+- A **monthly 30-minute review** with a peer, a departmental "code clinic", or a [US-RSE](https://us-rse.org/) peer.
 - **Pair or mob** on the tricky parts - Google explicitly counts qualified pair-programming as satisfying review.
 - You do not need a human on *every* change - just on the risky ones.
 

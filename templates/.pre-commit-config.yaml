@@ -1,8 +1,8 @@
-# ACER starter pre-commit config (Python-oriented; adapt for other languages).
+# Starter pre-commit config (Python-oriented; adapt for other languages).
 #
 # What this does: runs these checks automatically every time you `git commit`.
 # If any fail, the commit is blocked until you fix the issue - so problems never
-# enter history. This is "Layer 1" of the ACER Code Review Protocol and your most
+# enter history. This is "Layer 1" of the Code Review Protocol and your most
 # important safety net when working solo.
 #
 # One-time setup:

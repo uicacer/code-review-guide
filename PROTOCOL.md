@@ -1,4 +1,4 @@
-# The ACER Code Review Protocol
+# The Code Review Protocol
 
 > **This is our standard.** It is a stack of **layers**. Each layer catches problems so the next layer sees less noise - cheap automated checks first, scarce human judgement last.
 >
@@ -17,12 +17,12 @@
          │           │ Layer 2  Author self-review     (you)       │
          │           │ Layer 3  CI safety net          (every PR)  │
          ▼           │ Layer 4  Human review           (a peer)    │
-  scarce / human     │ Layer 5  Adversarial & PHI pass (sensitive) │  ← ACER addition
+  scarce / human     │ Layer 5  Adversarial & PHI pass (sensitive) │  ← added for sensitive data
                      └─────────────────────────────────────────────┘
                               → MERGE (improves code health)
 ```
 
-**Layers 1-4 are the industry-standard "defense in depth."** Layers **0** and **5** are what we add because ACER keeps small/solo teams and handles **patient data**. A **solo mode** (bottom of this page) tells you what changes when you are the only developer.
+**Layers 1-4 are the industry-standard "defense in depth."** Layers **0** and **5** are added for two common realities: small or solo teams, and code that handles **sensitive or patient data**. A **solo mode** (bottom of this page) tells you what changes when you are the only developer.
 
 ---
 
@@ -62,7 +62,7 @@
 
 ## Layer 4 - Human review
 *Now a person spends their scarce attention only on what machines cannot judge.* Review in **priority order**: do not sweat the small stuff until the big stuff is clear:
-1. **Correctness & design**: does it do the right thing? Does it fit the architecture?
+1. **Correctness, design & alignment**: does it do the right thing, fit the architecture, and do *exactly* what it claims with no unrelated or tangled changes?
 2. **Tests**: do they exist and cover the new logic and edge cases?
 3. **Readability & naming**: will someone understand this in six months?
 4. **Style**: *last*, and automated so humans never argue about it.
@@ -80,9 +80,9 @@ Rules of the human pass:
 
 ---
 
-## Layer 5 - Adversarial & PHI pass  *(ACER addition - sensitive code only)*
+## Layer 5 - Adversarial & PHI pass  *(sensitive code only)*
 
-**Required** for any change touching **sensitive or regulated data (e.g., patient data/PHI), authentication, data access, de-identification, a secure compute environment, or ML inputs/outputs**: common in ACER projects such as AIHealth4All. Full walkthrough with plain-language explanations: [Adversarial review](docs/03-adversarial-review.md).
+**Required** for any change touching **sensitive or regulated data (e.g., patient data/PHI), authentication, data access, de-identification, a secure compute environment, or ML inputs/outputs**: common in research, data, and clinical projects (for example, a FHIR health-data pipeline). Full walkthrough with plain-language explanations: [Adversarial review](docs/03-adversarial-review.md).
 
 This layer adds the **attacker's point of view** on top of normal review:
 - One reviewer (rotating weekly) puts on the [**attacker hat**](GLOSSARY.md#the-adversarial-redblue-team-terms): instead of "does this work?", they ask **"how would I abuse this?"** This is [**adversarial review**](GLOSSARY.md#the-adversarial-redblue-team-terms).
@@ -106,7 +106,7 @@ This layer adds the **attacker's point of view** on top of normal review:
 
 ## Solo mode - when you are the only developer
 
-Most ACER projects have one developer and no one to be the Layer 4 "peer." You do not skip review - you **manufacture** it. What changes:
+Many projects have just one developer and no one to be the Layer 4 "peer." You do not skip review - you **manufacture** it. What changes:
 
 | Layer | Team | **Solo** |
 |---|---|---|
@@ -114,7 +114,7 @@ Most ACER projects have one developer and no one to be the Layer 4 "peer." You d
 | 1 Hooks | same | **same - your most important safety net** |
 | 2 Self-review | same | **same - do it seriously, with a delay** |
 | 3 CI | same | **same - it is your tireless reviewer** |
-| 4 Human review | a peer approves | **you review your own PR the next morning, by checklist; + a monthly 30-min review with an ACER RSE / peer / [US-RSE](https://us-rse.org/); + optional AI reviewer as a first opinion** |
+| 4 Human review | a peer approves | **you review your own PR the next morning, by checklist; + a monthly 30-min review with a peer or a research software engineer (e.g. via [US-RSE](https://us-rse.org/)); + optional AI reviewer as a first opinion** |
 | 5 Adversarial | rotating adversary | **a timed 15-minute attacker pass on your own diff, out loud** |
 
 Honest note: for tiny, throwaway solo scripts, full process is overkill - lean on Layers 1-3 and a quick self-review. Scale up as the code gets closer to real patient data or production. Full detail: [Solo vs team](docs/01-solo-vs-team.md).

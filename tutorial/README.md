@@ -1,6 +1,6 @@
-# The ACER Code Review Tutorial - Zero to Expert
+# Code Review Tutorial: Zero to Expert
 
-A hands-on path for ACER developers. It assumes **you know nothing** about code review - or even about pull requests - and takes you to confidently reviewing AI-generated, patient-data code.
+A hands-on path for any developer. It assumes **you know nothing** about code review - or even about pull requests - and takes you to confidently reviewing AI-generated, patient-data code.
 
 Work through the levels in order. Each one is practical: you *do* something, not just read.
 
@@ -17,7 +17,7 @@ Work through the levels in order. Each one is practical: you *do* something, not
 | **[2](level-2-systematic.md)** | **Systematic review & automation** | Run a full review in priority order. Set up hooks + CI so machines do the boring checks. | ~3 hrs |
 | **[3](level-3-expert-and-ai.md)** | **Expert: AI code & adversarial review** | Review AI-generated code, do a security/PHI attacker pass, and mentor others. | ~3 hrs |
 
-By the end you can carry out every layer of the [ACER Code Review Protocol](../PROTOCOL.md).
+By the end you can carry out every layer of the [Code Review Protocol](../PROTOCOL.md).
 
 ---
 

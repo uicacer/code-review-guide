@@ -3,6 +3,7 @@
 **Goal:** (a) run a full human review in a repeatable order, and (b) set up the machines that do the boring checks for you - so you (and reviewers) only spend attention where it matters. This is Layers 1-4 of the [protocol](../PROTOCOL.md).
 
 > Prerequisite: [Levels 0-1](level-0-mechanics.md). All terms in the [Glossary](../GLOSSARY.md).
+> Practice it: [exercises/level-2-review](../exercises/level-2-review/).
 
 ---
 
