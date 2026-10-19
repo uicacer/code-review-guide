@@ -18,3 +18,6 @@ node_modules/
 # Local notes not meant for the repo
 scratch/
 *.local.md
+
+# Local-only: presentation drafts (kept out of the public repo)
+slides/
