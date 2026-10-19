@@ -1,4 +1,4 @@
-# CODEOWNERS example — for teams (not needed for solo projects).
+# CODEOWNERS example - for teams (not needed for solo projects).
 #
 # What it does: automatically requests a review from the right person/team when
 # a PR touches files they own, and (with branch protection) requires their
@@ -14,7 +14,7 @@
 # Default owner for everything (fallback)
 *                           @uicacer/rse-team
 
-# Data pipeline / anything touching PHI — require the security champion too
+# Data pipeline / anything touching PHI - require the security champion too
 /pipelines/                 @uicacer/rse-team @the-security-champion
 /healthlake/                @uicacer/rse-team @the-security-champion
 /**/fhir_mapping/           @uicacer/rse-team @the-security-champion
@@ -22,7 +22,7 @@
 # ML / model code
 /models/                    @the-ml-lead
 
-# Infrastructure (AWS, CI config) — higher-stakes, require infra owner
+# Infrastructure (AWS, CI config) - higher-stakes, require infra owner
 /infrastructure/            @the-infra-owner
 /.github/workflows/         @the-infra-owner
 

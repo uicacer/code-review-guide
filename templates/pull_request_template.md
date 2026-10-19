@@ -25,8 +25,8 @@ GitHub will pre-fill every new PR with this. Delete the italic hints as you fill
 
 ## AI disclosure
 - [ ] No AI assistance
-- [ ] AI-assisted — the parts I'm least sure about: <!-- name files/functions -->
-<!-- I have read and understood every line I'm submitting. -->
+- [ ] AI-assisted - the parts I am least sure about: <!-- name files/functions -->
+<!-- I have read and understood every line I am submitting. -->
 
 ## Security & PHI checklist (required if this touches data / auth / patient info)
 - [ ] No secrets (keys, passwords, tokens) in the code or history

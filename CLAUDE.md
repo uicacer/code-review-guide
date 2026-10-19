@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-A pure documentation and templates repository — no code, no build system, no tests. All content is Markdown.
+A pure documentation and templates repository - no code, no build system, no tests. All content is Markdown.
 
-- **[PROTOCOL.md](PROTOCOL.md)** — the canonical 6-layer code review workflow (the "standard")
-- **[tutorial/](tutorial/)** — 4-level hands-on tutorial (Level 0 mechanics → Level 3 expert/AI)
-- **[docs/](docs/)** — deep-dives: solo review, reviewing AI code, adversarial review, references
-- **[templates/](templates/)** — reusable artifacts: PR template, review checklist, `.pre-commit-config.yaml`, CODEOWNERS example
-- **[GLOSSARY.md](GLOSSARY.md)** — plain-language definitions for every term used in the docs
+- **[PROTOCOL.md](PROTOCOL.md)**: the canonical 6-layer code review workflow (the "standard")
+- **[tutorial/](tutorial/)**: 4-level hands-on tutorial (Level 0 mechanics → Level 3 expert/AI)
+- **[docs/](docs/)**: deep-dives: solo review, reviewing AI code, adversarial review, measuring review health, references
+- **[templates/](templates/)**: reusable artifacts: PR template, review checklist, `.pre-commit-config.yaml`, CODEOWNERS example
+- **[GLOSSARY.md](GLOSSARY.md)**: plain-language definitions for every term used in the docs
 
 ## Conventions
 
@@ -30,7 +30,7 @@ A pure documentation and templates repository — no code, no build system, no t
 
 **Solo mode** is a first-class variant: any change to team-mode layers must have a corresponding solo-mode equivalent documented.
 
-**PHI / HIPAA context:** The protocol is general-purpose — it applies to any software project — but gives extra care to sensitive/regulated data (e.g., patient data on AWS HealthLake/FHIR). Security and PHI language in docs/Layer 5 must stay precise (STRIDE-lite, least-privilege, audit logs, synthetic test data).
+**PHI / HIPAA context:** The protocol is general-purpose - it applies to any software project - but gives extra care to sensitive/regulated data (e.g., patient data on AWS HealthLake/FHIR). Security and PHI language in docs/Layer 5 must stay precise (STRIDE-lite, least-privilege, audit logs, synthetic test data).
 
 **Conventional Comments** (`praise:`, `nitpick:`, `suggestion:`, `issue:`, `question:` with `(blocking)`/`(non-blocking)`) are used throughout as the standard for review feedback. References to this convention link to https://conventionalcomments.org/.
 
