@@ -8,7 +8,7 @@ This repository is two things:
 
 It applies to **any software project** — scripts, libraries, web apps, data pipelines, or AI/ML systems. It pays special attention to two situations common at ACER: working **solo** (no second reviewer), and handling **sensitive or regulated data**. Health-data projects get extra care, because a defect there can expose patient information (a HIPAA breach) — AIHealth4All (AWS HealthLake / FHIR) is one such example.
 
-It also serves as our shareable answer when someone asks *“what is ACER's code review process?”* — just send them the link.
+It also serves as our shareable answer when someone asks *“what is ACER's code review process?”*
 
 ---
 
