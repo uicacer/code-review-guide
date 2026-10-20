@@ -72,6 +72,8 @@ Every term we use, explained simply. No prior knowledge assumed. If a doc uses a
 
 ## Security terms
 
+**Defense in depth**: A security design principle: stack multiple independent layers of protection so that if one fails, the next catches the problem. No single layer is trusted to catch everything on its own. *The whole layered review protocol is built on this idea.*
+
 **Secret**: Any sensitive credential that must stay private: passwords, API keys, database connection strings, access tokens, private keys. *Leaking one can let an attacker into your systems.*
 
 **Secret scanning**: A tool that searches your code (and its history) for accidentally committed secrets and blocks or flags them. Examples: `gitleaks`, `TruffleHog`, GitHub's built-in secret scanning. *Because once a secret is pushed to GitHub, assume it is compromised.*
@@ -130,6 +132,8 @@ Every term we use, explained simply. No prior knowledge assumed. If a doc uses a
 
 **Security champion**: One team member designated to carry the security perspective into everyday work and reviews. *A lightweight alternative to a full security team - ideal for a small group.*
 
+**Detection gap**: A risk that has been identified during an adversarial review but that your current monitoring or alerting would not catch if it actually happened. *The blue-team follow-up step is specifically to find and file these.*
+
 ---
 
 ## Health-data terms
@@ -164,6 +168,12 @@ Every term we use, explained simply. No prior knowledge assumed. If a doc uses a
 
 **Datasheet (for a dataset)**: A standard document describing a dataset's origin, contents, and appropriate uses.
 
+**Model poisoning**: An attack where an adversary corrupts the training data so the model learns incorrect or biased behavior. *A real risk for any clinical ML model trained on data that passes through external systems.*
+
+**Membership inference**: An attack where someone queries a trained model to determine whether a specific individual was in the training set — effectively recovering private information from the model itself. *For a clinical model trained on patient data, this is a direct PHI disclosure risk.*
+
+**Adversarial inputs**: Inputs crafted specifically to cause a model to behave incorrectly — for example, a medical image modified pixel-by-pixel to fool a classifier into a wrong diagnosis. *Reviewers check that ML inference endpoints validate and sanitize inputs.*
+
 **Drift**: When real-world data gradually changes so a model's accuracy degrades over time. *Needs monitoring after deployment.*
 
 ---
@@ -183,6 +193,10 @@ Every term we use, explained simply. No prior knowledge assumed. If a doc uses a
 **Technical debt**: Shortcuts in code that save time now but cost more later. Review helps keep it in check.
 
 **Blast radius**: how much could break if a change is wrong. Used to decide how deep a review must be: a small blast radius allows a lighter review, a large one requires a full line-by-line review.
+
+**Rubber-stamping**: Approving a pull request without actually reviewing it — clicking approve to clear the queue rather than to signal genuine confidence in the change. *A key review health anti-pattern; a high share of approvals within one hour of opening is its timing signature.*
+
+**Rollback plan**: A written description, in the pull request, of how to undo the change if something breaks after merging. For a simple change it may be one sentence ("revert this commit and redeploy"). For a database migration or infrastructure change it matters more — there may be no simple undo, so the plan must be explicit before merge. *Authors write it; reviewers check it is realistic.*
 
 **Vanity metric**: a number that is easy to measure and looks like quality but does not guarantee it, such as code-coverage percentage or linter-violation counts.
 
