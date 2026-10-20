@@ -20,11 +20,10 @@
 
 - AI writes code fast, but ~45% of it has security flaws ([Veracode 2025](https://www.veracode.com/resources/analyst-reports/2025-genai-code-security-report/))
 - The "70% problem" ([Osmani](https://addyo.substack.com/p/the-70-problem-hard-truths-about)): AI gets you 70% quickly; the critical last 30% still needs human judgment
-- Developers were 19% slower with AI but felt faster ([METR 2025](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/)): a documented trust trap
 - For sensitive data, a missed bug is not just wrong; it can be a reportable breach or wrong clinical result
 - Review is the primary quality and safety control now, not optional polish
 
-**[FIGURE]** Three stat tiles: 45% · 70% · 19%.
+**[FIGURE]** Two stat tiles: 45% · 70%.
 
 ---
 
