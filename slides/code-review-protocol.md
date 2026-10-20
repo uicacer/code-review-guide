@@ -1,7 +1,7 @@
 # Code Review Guide For ACER
 ### Slide outline — mirrors the current Code_Review_Guide.pptx
 
-> One slide per `---`. Build animations are shown as the final revealed state. _Italics_ are speaker notes. **[FIGURE]** marks a suggested visual.
+> One slide per `---`. Build animations are shown as the final revealed state.
 
 ---
 
@@ -21,8 +21,6 @@
 - The "70% problem" ([Osmani](https://addyo.substack.com/p/the-70-problem-hard-truths-about)): AI gets you 70% quickly; the critical last 30% still needs human judgment
 - For sensitive data, a missed bug is not just wrong; it can be a reportable breach or wrong clinical result
 
-**[FIGURE]** Two stat tiles: 45% · 70%.
-
 ---
 
 ## Slide 3: The protocol, six layers of defense
@@ -34,9 +32,7 @@
 - **L4  Human review**: correctness, design, alignment; then tests, readability, style
 - **L5  Sensitive-data pass**: adversarial pass for sensitive data, auth, or ML
 
-_Golden rule ([Google eng-practices](https://google.github.io/eng-practices/review/reviewer/standard.html)): approve a change once it improves code health (overall quality and correctness); do not demand perfection._
-
-**[FIGURE]** Six stacked bars building one at a time; golden rule pinned at the bottom.
+Golden rule ([Google eng-practices](https://google.github.io/eng-practices/review/reviewer/standard.html)): approve a change once it improves code health (overall quality and correctness); do not demand perfection.
 
 ---
 
@@ -57,8 +53,6 @@ _Golden rule ([Google eng-practices](https://google.github.io/eng-practices/revi
 - **For ML components**: also check model poisoning (corrupting training data to skew outputs), membership inference (recovering patient identity from a trained model), adversarial inputs (crafted inputs that fool the model)
 - **Defender follow-up**: would our logs or alerts catch it? If not, file a detection gap (a risk your monitoring would not catch)
 
-**[FIGURE]** Red hat (attacker) + blue hat (defender) over a data-pipeline icon.
-
 ---
 
 ## Slide 5: Human review, calibrate to risk and label clearly
@@ -69,8 +63,6 @@ _Golden rule ([Google eng-practices](https://google.github.io/eng-practices/revi
 - **Sensitive data is always high risk**, whatever the tier
 - **Label every comment** using [Conventional Comments](https://conventionalcomments.org/): `issue (blocking):`, `suggestion (non-blocking):`, `praise:`, `question:`, `nitpick:`
 - Example: `issue (blocking): Token logged in plain text`
-
-**[FIGURE]** Risk matrix: low vs high, with a hard floor for sensitive data.
 
 ---
 
@@ -88,8 +80,6 @@ _Golden rule ([Google eng-practices](https://google.github.io/eng-practices/revi
 - **Review by logical unit, not line order**: each piece looks clean while the design drifts across the whole
 - **Steer the agent** (a tool that writes code autonomously) while it generates; often the highest-leverage moment, before the PR
 - **Require proof it ran**: tests, output, screenshots; "it compiles" is not enough
-
-**[FIGURE]** Two columns: spend less vs spend more, with icons.
 
 ---
 
@@ -112,8 +102,6 @@ Pull request description checklist:
 - **Large team**: CODEOWNERS (a file that auto-assigns reviewers by which files changed) and dual approval; no heavyweight central approval boards
 - **Sensitive data at any size**: turn on Layer 5
 - **Health check**: a high rate of approvals within one hour signals rubber-stamping (approving without actually reviewing)
-
-**[FIGURE]** Maturity ladder: Solo, Small team, Large team.
 
 ---
 
