@@ -45,7 +45,7 @@ _Layers 0-4 are industry-standard. Layer 5 is added specifically for sensitive o
 
 - Required for PHI (patient data), authentication, de-identification (removing patient identifiers), ML inputs/outputs
 - Attacker mindset: "how would someone abuse this?" instead of "does this work?"
-- [STRIDE-lite](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats): six yes/no questions: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege
+- [STRIDE-lite](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats): a lightweight version of STRIDE threat modeling; full STRIDE requires a security expert and hours of formal analysis; the "lite" version reduces it to six yes/no questions any reviewer can answer: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege
 - For ML: also check model poisoning (corrupting training data), membership inference (recovering patient identity from a model), adversarial inputs (crafted inputs that fool the model)
 - Defender follow-up: would our logs catch it? If not, file a detection gap
 
