@@ -1,88 +1,133 @@
-# Code Review: A Practical Guide
-### Slide outline (draft for building a Google Slides deck)
+# Code Review Guide For ACER
+### Slide outline — mirrors the current Code_Review_Guide.pptx
 
-> One slide per `---`. Max 5 bullets per slide. _Italics_ are speaker notes. **[FIGURE]** marks a suggested visual.
+> One slide per `---`. Build animations are shown as the final revealed state. _Italics_ are speaker notes. **[FIGURE]** marks a suggested visual.
 
 ---
 
 ## Slide 1: Title
 
-- Code Review: A Practical Guide
-- A layered standard for reviewing code, from basics to expert
-- Special care for AI-generated code and sensitive data
-- Full guide and templates: https://github.com/uicacer/code-review-guide
-
-**[FIGURE]** Screenshot of a real pull request with review comments.
+- Code Review Guide For ACER
+- Anas Nassar, Research Software Engineer
+- nassar@uic.edu
+- https://github.com/uicacer/code-review-guide
 
 ---
 
 ## Slide 2: Why this matters now
 
+- The hard part of software shifted from writing code to verifying it
 - AI writes code fast, but ~45% of it has security flaws ([Veracode 2025](https://www.veracode.com/resources/analyst-reports/2025-genai-code-security-report/))
 - The "70% problem" ([Osmani](https://addyo.substack.com/p/the-70-problem-hard-truths-about)): AI gets you 70% quickly; the critical last 30% still needs human judgment
 - For sensitive data, a missed bug is not just wrong; it can be a reportable breach or wrong clinical result
-- Review is the primary quality and safety control now, not optional polish
 
 **[FIGURE]** Two stat tiles: 45% · 70%.
 
 ---
 
-## Slide 3: The protocol, six layers
+## Slide 3: The protocol, six layers of defense
 
-- **Golden rule** ([Google](https://google.github.io/eng-practices/review/reviewer/standard.html)): approve once it improves code health (overall quality); do not demand perfection
-- **Defense in depth**: stack independent layers so if one fails the next catches it; cheap and automatic first, human judgment last
-- **Layers 0-3**: plan small, pre-commit hooks (auto-checks before each commit), self-review, CI (server that reruns all checks on every PR)
-- **Layer 4**, Human review: correctness, design, tests; calibrate depth to blast radius (how much damage a bug here causes)
-- **Layer 5**, Adversarial pass: required for sensitive data, auth, or ML (next slide)
+- **L0  Plan and scope**: keep changes small; review the plan before generating code
+- **L1  Automate the obvious**: hooks (scripts that run before each commit) run lint, format, type check, secret scan
+- **L2  Author self-review**: run it, read your diff as a stranger, disclose AI use
+- **L3  CI safety net** (Continuous Integration, a server that reruns all checks on every pull request): full test suite and security scans on every PR
+- **L4  Human review**: correctness, design, alignment; then tests, readability, style
+- **L5  Sensitive-data pass**: adversarial pass for sensitive data, auth, or ML
 
-_Layers 0-4 are industry-standard. Layer 5 is added specifically for sensitive or patient data._
+_Golden rule ([Google eng-practices](https://google.github.io/eng-practices/review/reviewer/standard.html)): approve a change once it improves code health (overall quality and correctness); do not demand perfection._
 
-**[FIGURE]** Six stacked bars: top = cheap/automatic, bottom = human.
+**[FIGURE]** Six stacked bars building one at a time; golden rule pinned at the bottom.
 
 ---
 
 ## Slide 4: Layer 5, the sensitive-data pass
 
-- Required for PHI (patient data), authentication, de-identification (removing patient identifiers), ML inputs/outputs
-- Attacker mindset: "how would someone abuse this?" instead of "does this work?"
-- [STRIDE-lite](https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats): a lightweight version of STRIDE threat modeling; full STRIDE requires a security expert and hours of formal analysis; the "lite" version reduces it to six yes/no questions any reviewer can answer: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege
-- For ML: also check model poisoning (corrupting training data), membership inference (recovering patient identity from a model), adversarial inputs (crafted inputs that fool the model)
-- Defender follow-up: would our logs catch it? If not, file a detection gap
+- **Required for**: patient data (PHI), auth, data access, de-identification (removing patient identifiers), ML, secure compute
+- **Attacker hat**: STRIDE-lite, a lightweight version of full threat modeling reduced to six yes/no questions any reviewer can answer
+
+| Threat | Question |
+|---|---|
+| Spoof | Can someone pose as another user? |
+| Tamper | Can data change undetected? |
+| Repudiate | Can actions be denied later? |
+| Disclose | Can data reach the wrong person? |
+| Deny | Can the service be knocked out? |
+| Escalate | Can a user gain extra rights? |
+
+- **For ML components**: also check model poisoning (corrupting training data to skew outputs), membership inference (recovering patient identity from a trained model), adversarial inputs (crafted inputs that fool the model)
+- **Defender follow-up**: would our logs or alerts catch it? If not, file a detection gap (a risk your monitoring would not catch)
 
 **[FIGURE]** Red hat (attacker) + blue hat (defender) over a data-pipeline icon.
 
 ---
 
-## Slide 5: Reviewing AI-generated code
+## Slide 5: Human review, calibrate to risk and label clearly
 
-- Treat it like a confident junior developer: verify intent, edge cases, security, and hallucinated APIs (functions the AI invented that do not exist)
-- Coherence problem: each piece looks clean, but the design drifts across the whole; review by logical unit, not line by line
-- Review live too: steer the AI agent (a tool that writes code autonomously) during generation, not only at the PR
-- AI PR contract: author states intent, shows proof it ran, discloses what the AI wrote, and flags uncertain parts
-- Human accountability: no AI output takes effect without a named human sign-off
+- **Calibrate depth to blast radius** (how much damage a bug here would cause)
+  - Low risk (docs, tests, isolated helpers): conceptual review is enough
+  - High risk (shared code, migrations, auth, APIs, infrastructure): line by line
+- **Sensitive data is always high risk**, whatever the tier
+- **Label every comment** using [Conventional Comments](https://conventionalcomments.org/): `issue (blocking):`, `suggestion (non-blocking):`, `praise:`, `question:`, `nitpick:`
+- Example: `issue (blocking): Token logged in plain text`
 
-**[FIGURE]** Two columns: "spend less on" (style, formatting) vs "spend more on" (intent, security, hallucinated APIs).
-
----
-
-## Slide 6: Solo and how to adopt
-
-- Solo mode: automation (hooks + CI) + self-review next morning + monthly peer + AI review bot (strongly recommended; check data terms for PHI repos)
-- Day one, even solo: hooks, CI, self-review, PR template; add Layer 5 when code touches sensitive data
-- Second developer joins: one required reviewer per PR, rotate the role, one-business-day response
-- Health signal: high rate of approvals within one hour = rubber-stamping (approving without actually reviewing) ([Goethel, Mews](https://developers.mews.com/code-generation-is-cheap-review-remains-costly/))
-- Tutorial: four levels (L0 mechanics to L3 AI and adversarial): https://github.com/uicacer/code-review-guide
-
-**[FIGURE]** Maturity ladder: Solo, Small team, Larger team.
+**[FIGURE]** Risk matrix: low vs high, with a hard floor for sensitive data.
 
 ---
 
-## Slide 7: Takeaways
+## Slide 6: Reviewing AI-generated code
 
-- Review is the core skill now; verifying code matters more than writing it
-- Cheap and automatic first; human judgment last; golden rule: approve once it improves code health
-- Sensitive data always earns an adversarial pass; ML adds model poisoning and membership inference checks
-- AI code: trust but verify; review live, require proof it ran, hold the human accountable
-- Full guide, templates, and tutorial: https://github.com/uicacer/code-review-guide
+- Treat it like a confident junior developer's work: fast, over-confident, must be verified
 
-**[FIGURE]** QR code linking to https://github.com/uicacer/code-review-guide.
+| Spend less on | Spend more on |
+|---|---|
+| Style, formatting, naming nits | Intent and understanding |
+| | Edge cases and error paths |
+| | Security-sensitive paths |
+| | Hallucinated APIs (functions the AI invented that do not exist) |
+
+- **Review by logical unit, not line order**: each piece looks clean while the design drifts across the whole
+- **Steer the agent** (a tool that writes code autonomously) while it generates; often the highest-leverage moment, before the PR
+- **Require proof it ran**: tests, output, screenshots; "it compiles" is not enough
+
+**[FIGURE]** Two columns: spend less vs spend more, with icons.
+
+---
+
+## Slide 7: The AI pull request contract
+
+- **Human accountability**: no AI output takes effect without a named human gate; the author is responsible for every line
+
+Pull request description checklist:
+- Proof it runs: tests, output, screenshots
+- AI disclosure: what the AI wrote and where you are least sure
+- Intent: what the change does and why
+- Where to look: point the reviewer at the risky areas
+
+---
+
+## Slide 8: Adopt it and keep it honest
+
+- **Solo**: hooks, CI, self-review, PR template; add Layer 5 when code touches sensitive data
+- **Small team**: one required reviewer, rotate the role, one-business-day response
+- **Large team**: CODEOWNERS (a file that auto-assigns reviewers by which files changed) and dual approval; no heavyweight central approval boards
+- **Sensitive data at any size**: turn on Layer 5
+- **Health check**: a high rate of approvals within one hour signals rubber-stamping (approving without actually reviewing)
+
+**[FIGURE]** Maturity ladder: Solo, Small team, Large team.
+
+---
+
+## Slide 9: Takeaways
+
+- **Verify**: review is the core skill now; invest in it
+- **Layer**: cheap and automatic first, human judgment last; approve once code health improves
+- **Protect**: sensitive data earns an adversarial pass; solo developers automate and self-review with discipline
+- **AI code**: trust but verify, review live, require proof it ran, hold the human accountable
+- **Augment**: use AI tools to help review, never to replace the human
+
+---
+
+## Slide 10: Thank you
+
+- Questions?
+- https://github.com/uicacer/code-review-guide
