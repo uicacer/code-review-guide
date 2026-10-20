@@ -41,7 +41,7 @@ You replace the missing human with four cheap, reliable signals:
 - Rubber-duck: explain the change out loud; the bugs surface when you hear yourself.
 
 ### 3. An occasional human
-- A **monthly 30-minute review** with a peer, a departmental "code clinic", or a [US-RSE](https://us-rse.org/) peer.
+- A **monthly 30-minute review** with a peer: a colleague, a collaborator, or someone found through a community like [US-RSE](https://us-rse.org/) or a departmental code clinic. US-RSE is a professional community for research software engineers — not a review service — but it is a good place to find someone willing to exchange reviews.
 - **Pair or mob** on the tricky parts - Google explicitly counts qualified pair-programming as satisfying review.
 - You do not need a human on *every* change - just on the risky ones.
 

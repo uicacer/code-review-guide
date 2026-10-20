@@ -19,5 +19,4 @@ node_modules/
 scratch/
 *.local.md
 
-# Local-only: presentation drafts (kept out of the public repo)
-slides/
+# Presentation drafts are now tracked in the repo

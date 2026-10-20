@@ -4,7 +4,7 @@
 >
 > **New to the terms** (lint, hook, CI, SAST, PHI, STRIDE...)? Every word is explained in the [**Glossary**](GLOSSARY.md). Never heard of a pull request? Start with the [**tutorial**](tutorial/).
 
-**Golden rule (from Google):** *Approve a change once it improves the overall [code health](GLOSSARY.md#review-culture--process-terms) of the system - do not demand perfection.* Review is for correctness, security, and shared understanding, not personal taste.
+**Golden rule (from [Google eng-practices](https://google.github.io/eng-practices/review/reviewer/standard.html)):** *Approve a change once it improves the overall [code health](GLOSSARY.md#review-culture--process-terms) of the system - do not demand perfection.* Review is for correctness, security, and shared understanding, not personal taste.
 
 ---
 
@@ -22,14 +22,14 @@
                               → MERGE (improves code health)
 ```
 
-**Layers 1-4 are the industry-standard "defense in depth."** Layers **0** and **5** are added for two common realities: small or solo teams, and code that handles **sensitive or patient data**. A **solo mode** (bottom of this page) tells you what changes when you are the only developer.
+**Layers 0-4 are all industry-standard good practice** — keeping changes small and planning before building is as foundational as running a linter. **Layer 5 is what we add** specifically for code that handles **sensitive or patient data**, where a bug is not just wrong but potentially a reportable breach. A **solo mode** (bottom of this page) tells you what changes when you are the only developer.
 
 ---
 
 ## Layer 0 - Plan & scope small
 *Not a filter - it decides how much work every later layer has to do.*
 - Know what you are building **before** you write it. For AI-assisted work, write a short [spec](GLOSSARY.md#ai-coding-terms) first (see [Reviewing AI code](docs/02-reviewing-ai-code.md)).
-- **Keep each change under ~400 changed lines.** Small changes get reviewed faster and more thoroughly; big ones hide bugs.
+- **Keep each change under ~400 changed lines.** Small changes get reviewed faster and more thoroughly; big ones are harder to review carefully, so defects slip through unnoticed.
 - One logical change per [pull request](GLOSSARY.md#the-basics-git-branches-and-pull-requests). Split unrelated work into separate PRs.
 - **Review the plan, not just the code.** The cheapest place to catch a bad approach is *before* generation: fixing a plan is a one-line edit, while fixing generated code is a rework cycle. For non-trivial AI-assisted work, get the spec/approach reviewed first.
 - **Size AI tasks to roughly 40% of the model's context window.** Beyond that, output quality degrades (called "[context rot](GLOSSARY.md#ai-coding-terms)") and the change grows too big to review well. Smaller tasks help the AI and the reviewer alike.
@@ -59,6 +59,18 @@
   - [**SAST**](GLOSSARY.md#security-terms) (scans source code for security holes) and [**dependency scanning**](GLOSSARY.md#security-terms) (checks your libraries for known vulnerabilities),
   - secret scanning again, on the whole history.
 - A red (failing) CI check means **no human review yet**: fix CI first.
+- **AI PR-review bot** (e.g., GitHub Copilot review, CodeRabbit): runs automatically on every PR and posts inline comments as a first-pass commenter. Unlike the deterministic checks above, it makes probabilistic judgment calls — treat its output as suggestions, not verdicts, and verify before applying. Clears 70-80% of low-hanging-fruit nits so the human reviewer focuses on what matters. **Strongly recommended for solo developers**, who have no human peer reviewer and need every automated substitute they can get. Optional for teams with a dedicated human reviewer.
+
+> ### ⚠ PHI CAVEAT — READ BEFORE ENABLING ANY AI REVIEW BOT
+>
+> **These tools send your entire diff to their servers.** Your codebase may contain PHI accidentally — test fixtures with real patient records, hardcoded MRNs, sample values in comments, or config files with credentials. Any of that goes to a third-party server. This is not a hypothetical: it is the most common source of inadvertent PHI disclosure in software teams using AI tooling.
+>
+> **Per-tool status (verified October 2026 — re-check before adoption as policies change):**
+> - **[CodeRabbit](https://coderabbit.ai/privacy)** — most transparent: explicitly states no training on your code (except open-source repos), SOC 2 Type II certified, HIPAA mentioned in privacy policy. Contact them for a BAA before using with any PHI repository.
+> - **[GitHub Copilot](https://github.com/features/copilot)** — Business/Enterprise plans do not train on your code; Individual plan may. HIPAA BAA not in public documentation — **contact GitHub/Microsoft sales before using with PHI repos**.
+> - **[Graphite](https://graphite.com/privacy)** — does not mention HIPAA, training practices, or data isolation anywhere in public documentation. **Do not use with PHI repositories until their security team confirms compliance in writing.**
+>
+> Full comparison table with source links: [Reviewing AI code](docs/02-reviewing-ai-code.md#ai-reviewer-tools---what-they-are-and-do-we-need-them).
 
 ## Layer 4 - Human review
 *Now a person spends their scarce attention only on what machines cannot judge.* Review in **priority order**: do not sweat the small stuff until the big stuff is clear:
@@ -90,6 +102,7 @@ This layer adds the **attacker's point of view** on top of normal review:
 - **PHI questions:** Is any patient data exposed in logs, errors, URLs, or test data? Is access [least-privilege](GLOSSARY.md#security-terms)? Is data encrypted [at rest and in transit](GLOSSARY.md#security-terms)? Are [audit logs](GLOSSARY.md#security-terms) on?
 - **Defender follow-up (the "blue team" half):** for each risk found, ask *"would our logs/alerts catch it if it happened?"* If not, write it down as a detection gap.
 - Use the [security & PHI checklist](templates/review-checklist.md).
+- **If the change touches ML/AI components** (training, inference, data pipelines feeding a model), STRIDE-lite is not enough on its own — run the [AI/ML angle](docs/03-adversarial-review.md#the-aiml-angle-relevant-to-ml-projects) from docs/03 alongside it. STRIDE was designed for general software and does not cover ML-specific threats: **model poisoning** (adversarially corrupting training data to skew outputs), **membership inference** (querying a trained model to recover whether a specific patient was in the training set — a direct PHI risk), and **adversarial inputs** (crafted inputs that cause the model to behave incorrectly). These are not hypothetical for clinical ML systems; they require an explicit additional pass.
 
 > **Why we add this:** a normal review asks if the code is correct. For patient data, a bug is not just wrong - it can be a reportable **HIPAA** breach or a harmful clinical result. The attacker lens catches a different, higher-stakes class of problem. See [why red/blue teaming, right-sized](docs/03-adversarial-review.md).
 
@@ -113,8 +126,8 @@ Many projects have just one developer and no one to be the Layer 4 "peer." You d
 | 0 Plan & scope | same | same |
 | 1 Hooks | same | **same - your most important safety net** |
 | 2 Self-review | same | **same - do it seriously, with a delay** |
-| 3 CI | same | **same - it is your tireless reviewer** |
-| 4 Human review | a peer approves | **you review your own PR the next morning, by checklist; + a monthly 30-min review with a peer or a research software engineer (e.g. via [US-RSE](https://us-rse.org/)); + optional AI reviewer as a first opinion** |
+| 3 CI | same | **same - it is your tireless reviewer; also add an AI PR-review bot (strongly recommended - your closest substitute for a human peer; check data-handling terms first for PHI repos)** |
+| 4 Human review | a peer approves | **you review your own PR the next morning, by checklist; + a monthly 30-min review with a peer (a colleague, collaborator, or someone found through a community like [US-RSE](https://us-rse.org/) or a departmental code clinic); + an AI review tool (e.g., CodeRabbit, GitHub Copilot review) as an additional automated pass when no human peer is available** |
 | 5 Adversarial | rotating adversary | **a timed 15-minute attacker pass on your own diff, out loud** |
 
 Honest note: for tiny, throwaway solo scripts, full process is overkill - lean on Layers 1-3 and a quick self-review. Scale up as the code gets closer to real patient data or production. Full detail: [Solo vs team](docs/01-solo-vs-team.md).

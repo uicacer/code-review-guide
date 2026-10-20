@@ -39,6 +39,7 @@ A [**secret**](../GLOSSARY.md#security-terms) is a password, API key, or token t
 ### What is "CI"?
 [**CI (Continuous Integration)**](../GLOSSARY.md#automation-the-tools-that-review-code-for-you) is a service that **automatically runs all your checks on a server every time you push or open a PR**, and shows a green ✔ or red ✘ on the PR. On GitHub it is **GitHub Actions**, configured by a small file in `.github/workflows/`.
 - Think of CI as a **tireless reviewer** that never forgets to run the tests and never skips a step.
+- CI is a general concept, not a single product. GitHub Actions is one implementation; GitLab CI/CD, Bitbucket Pipelines, CircleCI, and Jenkins are others. The same principle applies everywhere, so if your project lives elsewhere the ideas below transfer - only the config file's name and syntax change. We use GitHub Actions for the hands-on because it is the most common for research code.
 
 ### What about "CD"?
 You will often see "CI/CD" written together. **CD** ([Continuous Delivery / Deployment](../GLOSSARY.md#automation-the-tools-that-review-code-for-you)) is the step *after* CI: once the checks pass, it automatically ships the code to a staging or production environment. For code review, CI is the part that matters, because it decides whether a change is safe to accept. CD is simply where an approved change goes next, so we mention it only to place CI in context.

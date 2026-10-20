@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-A pure documentation and templates repository - no code, no build system, no tests. All content is Markdown.
+Primarily a documentation and templates repository. All content is Markdown except for a small Python sample project in `exercises/level-2-review/sample-project/` (deliberately imperfect code used as review practice material — do not "fix" it without updating the exercise answer key).
 
 - **[PROTOCOL.md](PROTOCOL.md)**: the canonical 6-layer code review workflow (the "standard")
 - **[tutorial/](tutorial/)**: 4-level hands-on tutorial (Level 0 mechanics → Level 3 expert/AI)

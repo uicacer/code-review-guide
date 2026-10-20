@@ -112,7 +112,7 @@ Every term we use, explained simply. No prior knowledge assumed. If a doc uses a
 
 **Threat modeling**: A structured way to list the threats to a system *before* they happen, by looking at it from an attacker's point of view, then deciding how to defend against each.
 
-**STRIDE**: A simple checklist (from Microsoft) of six threat categories, so non-experts can threat-model systematically. The letters stand for:
+**STRIDE**: A widely adopted threat-modeling checklist — created by Microsoft and referenced by NIST and OWASP — that breaks threats into six categories so non-experts can threat-model systematically. It is a solid foundation for general software security but does not cover ML/AI-specific threats (model poisoning, membership inference, adversarial inputs); for projects with ML components, pair it with the [OWASP LLM Top 10](https://genai.owasp.org/llm-top-10/). The letters stand for:
 - **S**poofing - pretending to be someone/something else.
 - **T**ampering - changing data you should not.
 - **R**epudiation - doing something and denying it, because nothing was logged.

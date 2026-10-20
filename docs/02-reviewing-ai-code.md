@@ -51,18 +51,20 @@ Assume the author may **not fully understand** the diff. Shift your attention:
 
 These are bots that automatically read a pull request and post review comments, like an extra reviewer that is always awake. The common ones:
 
-| Tool | Notes |
-|---|---|
-| **GitHub Copilot code review** | Built into GitHub/PRs; lowest friction if you are already on GitHub. |
-| **CodeRabbit** | Popular standalone PR-review bot; line-by-line comments + summaries. |
-| **Graphite (Diamond)** | PR-review bot focused on low false positives. |
-| **Cursor / Claude Code** | Can review a diff on request inside your editor. |
+| Tool | Notes | Trains on your code? | HIPAA / sensitive data |
+|---|---|---|---|
+| **GitHub Copilot code review** | Built into GitHub/PRs; lowest friction if you are already on GitHub. | No (Business/Enterprise plans); Individual plan may. | HIPAA BAA not in public docs — contact sales. No self-hosted option. |
+| **CodeRabbit** | Popular standalone PR-review bot; line-by-line comments + summaries. | No (except open-source repos). SOC 2 Type II; code not stored post-review. | HIPAA mentioned in privacy policy; BAA requires contacting them. Most transparent of the three. |
+| **Graphite (Diamond)** | PR-review bot focused on low false positives. | Not stated publicly. | No HIPAA mention, no self-hosted option in public docs. **Do not use with PHI repos until confirmed with their security team.** |
+| **Cursor / Claude Code** | Can review a diff on request inside your editor. | Governed by Anthropic's terms; no training on your code for paid plans. | Check your Anthropic agreement; not a hosted PR bot. |
+
+> **Why this matters for health-data repos:** these tools read your entire diff and send it to their servers. The risk is not your database — it is what is accidentally *in the code*: test fixtures with real patient records, hardcoded sample values with MRNs, config files with credentials. Any of that goes to a third-party server unless you verify the tool's data-handling terms first. Policies above sourced October 2026 from [coderabbit.ai/privacy](https://coderabbit.ai/privacy), [github.com/features/copilot](https://github.com/features/copilot), and [graphite.com/privacy](https://graphite.com/privacy) — re-verify before adoption as policies change.
 
 - **Good at:** a fast first pass - style nits, obvious bugs, missing tests, common security patterns. Properly tuned, they clear **70-80% of low-hanging fruit** so humans do not waste attention on it.
 - **Bad at:** deep domain logic, cross-system design, and *your* project's intent. They also produce **false positives / "text noise"** and can [hallucinate](../GLOSSARY.md#ai-coding-terms).
 - **The rule:** use one as a **pre-review gate** that clears noise - then a **human signs off** on logic, security, and architecture. **Augment, never replace.**
 
-**Do you need them?** Optional, not required. They are a *nice-to-have*, especially valuable for **solo developers** who have no human reviewer - a bot is a cheap first opinion. They are **not a substitute** for Layers 1-3 (hooks + CI do the deterministic checks more reliably) or for the Layer 4/5 human judgement, and for **PHI code** check the tool's data-handling terms before pointing it at a private health-data repo. Recommendation: **start with pre-commit + CI (free, deterministic). Add GitHub Copilot review or CodeRabbit later if the team wants an extra automated opinion - treat its comments as suggestions, not gospel.**
+**Do you need them?** Strongly recommended for **solo developers** (who have no human reviewer and need every automated substitute they can get); optional for teams with a dedicated human reviewer. They are **not a substitute** for Layers 1-3 (hooks + CI do the deterministic checks more reliably) or for the Layer 4/5 human judgement. Recommendation: **start with pre-commit + CI (free, deterministic). Add GitHub Copilot review or CodeRabbit once those are stable — treat their comments as suggestions, not gospel.**
 
 ### The coherence problem (the subtle one)
 AI code tends to have **local** correctness but not **global** coherence: overlapping solutions across modules, abstractions that do not compose, naming that drifts. Because each piece looks clean, nothing trips your correction reflex - so the mess accumulates *faster* than with human code. When reviewing, zoom out: does this fit the system, or does it just work in isolation?
