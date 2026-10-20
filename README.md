@@ -24,7 +24,7 @@ It is written to be shared freely, as an answer to the question *"what does a go
 | Review security / PHI code | [docs/03-adversarial-review.md](docs/03-adversarial-review.md) + [checklist](templates/review-checklist.md) |
 | Copy our templates | [templates/](templates/) |
 | Practice hands-on | [exercises/](exercises/) |
-| Present this to a team | **Slides:** _(add Google Slides link here)_ |
+| Present this to a team | **Slides:** [Code Review Guide for ACER](https://docs.google.com/presentation/d/18pkLoxSY_aIDlGb1hhlVJXVZc0IdQJY7HnQCByy0vV0/edit?usp=sharing) |
 | Measure if review is working | [docs/05-measuring-review-health.md](docs/05-measuring-review-health.md) |
 | Read the sources | [docs/04-references.md](docs/04-references.md) |
 
